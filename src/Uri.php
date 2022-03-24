@@ -60,7 +60,7 @@ class Uri
         $uri->host = $base->host;
         $uri->port = $base->port;
         if (strpos($uri->path, '/') !== 0) {
-            $uri->path = self::combinePath($uri->path, $base);
+            $uri->path = self::combinePath($uri->path, $base->path);
         }
         $uri->url = (string)$uri;
         $uri->isFullUrl = true;
