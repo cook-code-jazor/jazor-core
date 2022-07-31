@@ -3,6 +3,8 @@
 
 namespace Jazor;
 
+use Sparkle\Http\HttpResponseException;
+
 /**
  * Class Uri
  * @package Jazor\HttpClient
@@ -60,7 +62,7 @@ class Uri
         $uri->host = $base->host;
         $uri->port = $base->port;
         if (strpos($uri->path, '/') !== 0) {
-            $uri->path = self::combinePath($uri->path, $base);
+            $uri->path = self::combinePath($uri->path, $base->path);
         }
         $uri->url = (string)$uri;
         $uri->isFullUrl = true;
@@ -166,6 +168,11 @@ class Uri
     public function getAuthority(): string
     {
         return $this->authority;
+    }
+
+    public function getSchemaAndAuthority(): string
+    {
+        return $this->schema . '://' . $this->authority;
     }
 
     public function getHostAndPort(): string{
