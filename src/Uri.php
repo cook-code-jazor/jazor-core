@@ -206,7 +206,7 @@ class Uri
     /**
      * @return string
      */
-    public function getQuery(): string
+    public function getQuery(): ?string
     {
         return $this->query;
     }
@@ -222,7 +222,7 @@ class Uri
     /**
      * @return string
      */
-    public function getAnchor(): string
+    public function getAnchor(): ?string
     {
         return $this->anchor;
     }
