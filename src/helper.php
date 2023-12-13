@@ -1,5 +1,17 @@
 <?php
 
+if(!function_exists('is_email')) {
+    /**
+     * @param string $contents
+     * @return string
+     */
+    function is_email(string $contents): bool
+    {
+        $result = preg_match('/^([\w\-.]+)@([\w\-.]+)\.([0-9a-zA-Z]+)$/', $contents);
+
+        return $result !== false && $result >0;
+    }
+}
 if(!function_exists('limit_bin2hex')) {
     /**
      * @param string $contents
