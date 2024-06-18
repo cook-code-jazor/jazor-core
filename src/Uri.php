@@ -93,7 +93,7 @@ class Uri
 
     private function parseUrl($url)
     {
-        $matched = preg_match('/^(http(?:s)?)\:\/\/([\w\-\.\:]+?)(\/(?:[^\?#]*))?(\?(?:[^#]*))?(#(?:.*))?$/i', $url, $match);
+        $matched = preg_match('/^(http(?:s)?):\/\/([\w\-.:]+?)(\/[^?#]*)?(\?[^#]*)?(#.*)?$/i', $url, $match);
         if (!$matched) return false;
 
         if (isset($match[5])) $this->anchor = $match[5];
@@ -112,7 +112,7 @@ class Uri
 
     private function tryParsePathAndQuery($url)
     {
-        $matched = preg_match('/^((?:[^\?#]+))?(\?(?:[^#]*))?(#(?:.*))?$/i', $url, $match);
+        $matched = preg_match('/^([^?#]+)?(\?[^#]*)?(#.*)?$/i', $url, $match);
         if (!$matched) throw new \Exception('relative url not well formed');
 
 
@@ -128,10 +128,6 @@ class Uri
     private static function formatPath($path)
     {
         if (empty($path)) return '/';
-
-        if (strlen($path) > 2 && substr($path, -1) === '/') {
-            return substr($path, 0, -1);
-        }
         return $path;
     }
 
@@ -233,5 +229,10 @@ class Uri
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    public function isFullUrl(): bool
+    {
+        return $this->isFullUrl;
     }
 }
